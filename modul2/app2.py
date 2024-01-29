@@ -5,6 +5,7 @@ b = int(b)
 
 A = (1/2) * b * h
 print(A)
+print(type(A))
 
 
 # prn = print('out')
