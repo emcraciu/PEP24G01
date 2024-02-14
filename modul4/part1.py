@@ -37,3 +37,11 @@ def gauss(n):
 print(gauss(100))
 
 # sum from 1/1 to 1/n
+def sumafractii(x):
+    suma = 0
+    for i in range(1, x+1):
+        suma += 1/i
+    return suma
+
+x = int(input())
+print(sumafractii(x))
