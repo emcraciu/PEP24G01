@@ -6,10 +6,13 @@ shop_L = {'apple': 1.4, 'plums': 2, 'bananas': 10}
 
 shops = {'pro': shop_P, 'lil': shop_L, 'kau': shop_K}
 
+result = {}
 for cart_product, cart_quantity in cart.items():
-    print(cart_product, cart_quantity)
+    # print(cart_product, cart_quantity)
     for shop_name, shop_products in shops.items():
-        print(shop_name, shop_products[cart_product] * cart_quantity)
+        # print(shop_name, shop_products[cart_product] * cart_quantity)
+        result[shop_name] = result.get(shop_name, 0) + (shop_products[cart_product] * cart_quantity)
+print(result)
 
 
 
