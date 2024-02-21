@@ -14,3 +14,8 @@ for number in note.split(','):
 
 assert grades, 'No grades were provided'
 print(grades)
+
+if medie(grades) < 5:
+    print(f'{nume} failed the class')
+else:
+    print(f'{nume} passed the class')
