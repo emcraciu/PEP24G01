@@ -1,6 +1,6 @@
 def medie(numbers_list):
     return sum(numbers_list) / len(numbers_list)
-
+print(f"Script1 name is {__name__}")
 
 def suma(numbers_list):
     return sum(numbers_list)
