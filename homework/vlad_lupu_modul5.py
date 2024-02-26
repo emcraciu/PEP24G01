@@ -1,19 +1,21 @@
 import random
 
 
-def get_6_numbers_from_user(user_numbers: list):
+def get_6_numbers_from_user():
     """Returns a list of 6 numbers got from the user"""
-    count = 1
-    while count <= 6:
+    user_numbers = []
+    while len(user_numbers) < 6:
         try:
             user_choice = int(input("Choose a number from 1 to 49: "))
         except ValueError:
             print("Your input must be a valid integer number!")
             continue
         else:
-            if 1 <= user_choice <= 49:
+            if user_choice in user_numbers:
+                print(f"The number {user_choice} was already chosen.")
+                continue
+            elif 1 <= user_choice <= 49:
                 user_numbers.append(user_choice)
-                count += 1
             else:
                 print("Number not in range! Please...")
                 continue
