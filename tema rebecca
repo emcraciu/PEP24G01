@@ -1,0 +1,24 @@
+#exercitiul 1
+for a in range(10, 21):
+    b = 3 * a
+    c = 3 * a ** 2 - 4 * b + 4
+    print(f'========{a}=======')
+    print(f'Rezultatul este : {c}')
+    
+#exercitiul 2
+nr = input("Cate carti vreti sa adaugati? ")
+lista_carti = []
+keys = ("numele", "autorul", "anul")
+
+for i in range(int(nr)):
+    info = {}
+    print(f"=====Carte {i + 1}===== ")
+
+    for key in keys:
+        info[key] = input(f"Care este {key} cartii? ")
+
+    lista_carti.append(info)
+
+print("Cartile sunt: ")
+for carte in lista_carti:
+    print(carte)
