@@ -1,6 +1,9 @@
+from modul7.categorii import Haine, Accesorii
+
+
 class Shop:
     main_menu_options = {1: 'Categorii', 2: 'Produse', 3: 'Iesire'}
-    stoc = {}
+    stoc = []
     user_input = None
     status = None
 
@@ -21,11 +24,15 @@ class Shop:
             print('Nu este o valoare corecta pentru meniu')
         return option
 
+    def print_categories(self):
+        print(', '.join(set([cat.__class__.__name__ for cat in self.stoc])))
+
     def adauga_prod(self):
         produs, pret, stoc = input('give product, price, stoc: ').split(',')
         pret = int(pret)
         stoc = int(stoc)
         self.stoc.update({produs: (pret, stoc)})
+
 
     def show_stock(self):
         print(self.stoc)
@@ -61,5 +68,10 @@ class Shop:
 
 if __name__ == "__main__":
     s = Shop()
-    s.print_main_menu()
-    s.get_user_option(f'Alege optiune:', Shop.main_menu_options)
+    # s.print_main_menu()
+    # s.get_user_option(f'Alege optiune:', Shop.main_menu_options)
+    s.stoc.append(Haine(nume='tricouri', pret=100, stoc=200))
+    s.stoc.append(Haine(nume='pantaloni', pret=120, stoc=250))
+    s.stoc.append(Accesorii(nume='bratara', pret=10, stoc=1000))
+    print(s.stoc)
+    s.print_categories()

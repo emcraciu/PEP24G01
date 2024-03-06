@@ -16,6 +16,7 @@ class Accesorii(Categorii):
 class Incaltaminte(Categorii):
     pass
 
+
 if __name__ == "__main__":
     tricouri = Haine("tricou", 20, 35)
     print(tricouri.__class__.__name__)
