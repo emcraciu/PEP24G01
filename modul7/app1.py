@@ -1,4 +1,4 @@
-from modul7.categorii import Haine, Accesorii
+from modul7.categorii import Haine, Accesorii, Incaltaminte
 
 
 class Shop:
@@ -6,6 +6,7 @@ class Shop:
     products_menu_options = {1: 'Adaugare', 2: 'Vizualizare', 3: 'Iesire la meniul principal'}
     user_select_message = f'Alege optiune:'
     product_select_message = f'Introduceti optiunea:'
+    product_mapping = {'Haine': Haine, 'Accesorii': Accesorii, 'Incaltaminte': Incaltaminte}
     stoc = []
     user_input = None
     status = None
@@ -39,13 +40,21 @@ class Shop:
         print(options + '\n')
 
     def add_product(self):
-        produs, pret, stoc = input('give product, price, stoc: ').split(',')
-        pret = int(pret)
-        stoc = int(stoc)
-        self.stoc.update({produs: (pret, stoc)})
+        categorie = input('Introduceti numele categoriei:')
+        produs = input('Introduceti numele produsului:')
+        pret = input('Introduceti pret:')
+        stoc = input('Introduceti stoc:')
+        prod_class = self.product_mapping[categorie.capitalize()]
+        product = prod_class(produs, pret, stoc)
+        self.stoc.append(product)
 
     def show_stock(self):
-        print(self.stoc)
+        for obj in self.stoc:  # type: Haine
+            print(obj.__class__.__name__)
+            print('=' * 30)
+            print(obj.nume)
+            print(obj.pret)
+            print(obj.stoc)
 
     def remove_prod(self):
         product, price, qty = input('give product, price, quantity: ').split(',')
@@ -70,6 +79,8 @@ class Shop:
             option2 = self.get_user_option(self.product_select_message, self.products_menu_options)
             if option2 == 1:
                 self.add_product()
+            elif option2 == 2:
+                self.show_stock()
 
 
 if __name__ == "__main__":
