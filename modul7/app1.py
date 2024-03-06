@@ -3,13 +3,13 @@ from modul7.categorii import Haine, Accesorii
 
 class Shop:
     main_menu_options = {1: 'Categorii', 2: 'Produse', 3: 'Iesire'}
+    user_select_message = f'Alege optiune:'
     stoc = []
     user_input = None
     status = None
 
     def print_main_menu(self):
         menu = 'Bun venit la magazinul Pycharm: \n'
-        # user_select_message = f'Alege optiune:'
         options = '\n'.join([f'\t{key}. {value}' for key, value in self.main_menu_options.items()])
         print(menu + options + '\n')
 
@@ -25,14 +25,16 @@ class Shop:
         return option
 
     def print_categories(self):
-        print(', '.join(set([cat.__class__.__name__ for cat in self.stoc])))
+        print("=" * 40)
+        print(" CATEGORII ".center(40, "="))
+        print("=" * 40)
+        print("\n".join(set([f"---\t{cat.__class__.__name__}" for cat in self.stoc])))
 
     def adauga_prod(self):
         produs, pret, stoc = input('give product, price, stoc: ').split(',')
         pret = int(pret)
         stoc = int(stoc)
         self.stoc.update({produs: (pret, stoc)})
-
 
     def show_stock(self):
         print(self.stoc)
@@ -51,19 +53,10 @@ class Shop:
         self.stoc.update({product: (new_price, self.stoc[product][1])})
 
     def start(self):
-        print(self.menu)
-        self.user_input = input(self.user_select_message)
-        while self.user_input != '5':
-            if self.user_input == '1':
-                self.show_stock()
-            elif self.user_input == '2':
-                self.adauga_prod()
-            elif self.user_input == '3':
-                self.remove_prod()
-            elif self.user_input == '4':
-                self.reducere()
-            print(self.menu)
-            self.user_input = input(self.user_select_message)
+        self.print_main_menu()
+        option = self.get_user_option(self.user_select_message, self.main_menu_options)
+        if option == 1:
+            self.print_categories()
 
 
 if __name__ == "__main__":
@@ -73,5 +66,4 @@ if __name__ == "__main__":
     s.stoc.append(Haine(nume='tricouri', pret=100, stoc=200))
     s.stoc.append(Haine(nume='pantaloni', pret=120, stoc=250))
     s.stoc.append(Accesorii(nume='bratara', pret=10, stoc=1000))
-    print(s.stoc)
-    s.print_categories()
+    s.start()
