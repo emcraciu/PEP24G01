@@ -6,9 +6,9 @@ class Shop:
 
     def print_main_menu(self):
         menu = 'Bun venit la magazinul Pycharm: \n'
-        user_select_message = f'Alege optiune:'
+        # user_select_message = f'Alege optiune:'
         options = '\n'.join([f'\t{key}. {value}' for key, value in self.main_menu_options.items()])
-        print(menu + options + '\n' + user_select_message)
+        print(menu + options + '\n')
 
     def get_user_option(self, message, menu):
         while True:
@@ -17,11 +17,9 @@ class Shop:
                 if option in menu:
                     break
             except:
-                print('Nu este o valoare corecta pentru meniu')
-            else:
-                print('Nu este o valoare corecta pentru meniu')
-
-        return
+                pass
+            print('Nu este o valoare corecta pentru meniu')
+        return option
 
     def adauga_prod(self):
         produs, pret, stoc = input('give product, price, stoc: ').split(',')
