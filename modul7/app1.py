@@ -16,13 +16,14 @@ class Shop:
         options = '\n'.join([f'\t{key}. {value}' for key, value in self.main_menu_options.items()])
         print(menu + options + '\n')
 
-    def get_user_option(self, message, menu):
+    @staticmethod
+    def get_user_option(message, menu):
         while True:
             try:
                 option = int(input(message))
                 if option in menu:
                     break
-            except:
+            except Exception:
                 pass
             print('Nu este o valoare corecta pentru meniu')
         return option
@@ -67,31 +68,37 @@ class Shop:
                 print('Stoc:', obj.stoc)
                 print('-' * 30)
 
-    def remove_prod(self):
-        product, price, qty = input('give product, price, quantity: ').split(',')
-        price = int(price)
-        qty = int(qty)
-        stock = self.stoc[product][1] - qty
-        self.stoc.update({product: (price, stock)})
+    # def remove_prod(self):
+    #     product, price, qty = input('give product, price, quantity: ').split(',')
+    #     price = int(price)
+    #     qty = int(qty)
+    #     stock = self.stoc[product][1] - qty
+    #     self.stoc.update({product: (price, stock)})
 
-    def reducere(self):
-        product, procent = input('give product, sale discount: ').split(',')
-        procent = int(procent)
-        new_price = self.stoc[product][0] - ((procent / 100) * self.stoc[product][0])
-        self.stoc.update({product: (new_price, self.stoc[product][1])})
+    # def reducere(self):
+    #     product, procent = input('give product, sale discount: ').split(',')
+    #     procent = int(procent)
+    #     new_price = self.stoc[product][0] - ((procent / 100) * self.stoc[product][0])
+    #     self.stoc.update({product: (new_price, self.stoc[product][1])})
 
     def start(self):
-        self.print_main_menu()
-        option = self.get_user_option(self.user_select_message, self.main_menu_options)
-        if option == 1:
-            self.print_categories()
-        elif option == 2:
-            self.print_products()
-            option2 = self.get_user_option(self.product_select_message, self.products_menu_options)
-            if option2 == 1:
-                self.add_product()
-            elif option2 == 2:
-                self.show_stock()
+        while True:
+            self.print_main_menu()
+            option = self.get_user_option(self.user_select_message, self.main_menu_options)
+            if option == 1:
+                self.print_categories()
+            elif option == 2:
+                while True:
+                    self.print_products()
+                    option2 = self.get_user_option(self.product_select_message, self.products_menu_options)
+                    if option2 == 1:
+                        self.add_product()
+                    elif option2 == 2:
+                        self.show_stock()
+                    elif option2 == 3:
+                        break
+            elif option == 3:
+                break
 
 
 if __name__ == "__main__":
@@ -102,3 +109,5 @@ if __name__ == "__main__":
     s.stoc.append(Haine(nume='pantaloni', pret=120, stoc=250))
     s.stoc.append(Accesorii(nume='bratara', pret=10, stoc=1000))
     s.start()
+    # s.get_user_option(s.user_select_message, s.main_menu_options)
+    # Shop.get_user_option(s.user_select_message, s.main_menu_options)
