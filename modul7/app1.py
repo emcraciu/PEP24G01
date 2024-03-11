@@ -49,12 +49,23 @@ class Shop:
         self.stoc.append(product)
 
     def show_stock(self):
+        categories = {}
         for obj in self.stoc:  # type: Haine
-            print(obj.__class__.__name__)
+            if obj.__class__.__name__ in categories:
+                categories[obj.__class__.__name__].append(obj)
+            else:
+                categories[obj.__class__.__name__] = []
+                categories[obj.__class__.__name__].append(obj)
+
+        for name, obj_list in categories.items():
             print('=' * 30)
-            print(obj.nume)
-            print(obj.pret)
-            print(obj.stoc)
+            print(f'Categoria {name}')
+            print('=' * 30)
+            for obj in obj_list:
+                print('Nume:', obj.nume)
+                print('Pret:', obj.pret)
+                print('Stoc:', obj.stoc)
+                print('-' * 30)
 
     def remove_prod(self):
         product, price, qty = input('give product, price, quantity: ').split(',')
