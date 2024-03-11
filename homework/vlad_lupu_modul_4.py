@@ -10,16 +10,26 @@ Rezultatul functiei: {x}""")
 print(calculate_x_and_y())
 
 # 2.
-num_of_books = int(input("How many books do you want to add in your library? "))
 library = []
 keys = ("name", "author", "year")
+
+while True:
+    try:
+        num_of_books = int(input("How many books do you want to add in your library? "))
+        break
+    except ValueError:
+        print("You must add only integer numbers!")
+        continue
 
 for i in range(num_of_books):
     book_info = {}
     print(f"===== Book {i + 1} =====")
 
     for key in keys:
-        book_info[key] = input(f"What is the {key} of the book? ")
+        if key == "year":
+            book_info[key] = int(input(f"What is the {key} of the book? "))
+        else:
+            book_info[key] = input(f"What is the {key} of the book? ")
 
     library.append(book_info)
 
@@ -31,5 +41,5 @@ for book in library:
 input_year = int(input("Type a publication year: "))
 
 for book in library:
-    if input_year < int(book["year"]):
+    if input_year < book["year"]:
         print(f"{book["name"]} was published after the {input_year}.")
