@@ -12,5 +12,4 @@ print(''.join(map(lambda letter: 'a' if letter[0] % 2 else 'b', enumerate(all_ob
 # '0123'
 
 all_objects = input('provide letters: ')
-# print(''.join(map(lambda letter: #, enumerate(all_objects))))
-
+print(''.join(map(lambda letter: str(letter[0]), enumerate(all_objects))))
