@@ -46,3 +46,10 @@ print(''.join(list(filter(lambda letter: True, 'Hello World'))))  # pass all obj
 print(''.join(list(filter(lambda letter: letter.lower() == letter, 'Hello World'))))  # all lower case letters
 print(''.join(list(filter(lambda letter: letter.isalpha(), '1Hello1 World1'))))  # pass all letters no special chars
 print(''.join(list(filter(lambda letter: letter.isalpha(), '1Hello1 World1')))) # pass all letter for which ascii code is even
+
+sum('abc')
+
+class Test():
+    def __add__(self, other):
+        return other + self.__pret
+
