@@ -24,3 +24,55 @@ Iterating the object will return all workers that have worked less than 8h (name
    c) 5p: class documentation for all classes
    d) 5p: method documentation for all methods
 """
+from datetime import datetime, timedelta
+
+
+class Pontaj:
+
+    def __init__(self):
+        self.caiet_pontaj = {}
+
+    def __iter__(self):
+        return IteratorPontaj(self.caiet_pontaj)
+
+    def sosire(self, nume: str, data: datetime):
+        self.caiet_pontaj.update({nume: data})
+
+    def plecare(self, nume, data):
+        self.caiet_pontaj.update({nume: data - self.caiet_pontaj[nume]})
+
+
+class IteratorPontaj:
+    def __iter__(self):
+        return self
+
+    def __init__(self, caiet_pontaj: dict):
+        self.caiet_pontaj = caiet_pontaj
+
+    def __next__(self):
+        for nume, timp in self.caiet_pontaj.copy().items():
+            timp: timedelta
+            if timp.seconds < 28800:
+                del self.caiet_pontaj[nume]
+                return nume
+            else:
+                del self.caiet_pontaj[nume]
+        else:
+            raise StopIteration
+
+
+p = Pontaj()
+p.sosire(nume='John', data=datetime(2022, 1, 1, 10, 30, 32))
+p.sosire(nume='Ana', data=datetime(2022, 1, 2, 12, 45, 50))
+p.sosire(nume='Bob', data=datetime(2022, 1, 3, 8, 20, 15))
+
+print(p.caiet_pontaj)
+
+p.plecare(nume="John", data=datetime(2022, 1, 1, 18, 30, 32))
+p.plecare(nume="Ana", data=datetime(2022, 1, 2, 17, 30, 32))
+p.plecare(nume="Bob", data=datetime(2022, 1, 3, 16, 30, 32))
+print(p.caiet_pontaj)
+
+with open("Out.Log", "x") as file:
+    for user in p:
+        file.write(user)

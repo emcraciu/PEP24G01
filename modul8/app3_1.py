@@ -23,8 +23,10 @@ salarii_input = input("Introduceti salariile separate cu virgula: ")
 procent_maj = (input("Introduceti procentul de marire: "))
 print("Salariile marite sunt:")
 
+
 def marire():
     for sal in salarii_input.split(","):
         yield str(int(sal) * (1 + float(procent_maj) / 100))
+
 
 print('\n'.join(marire()))
