@@ -24,4 +24,5 @@ def check_passwd():
     if condition_not_ok:
         check_passwd()
 
-check_passwd()
+if __name__ == "__main__":
+    check_passwd()
